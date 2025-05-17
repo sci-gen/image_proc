@@ -104,6 +104,7 @@ def save_combined_results(test_images, target1, target2, score1, score2, path):
     
     return save_path
 
+# 0のテンプレート画像を比較する
 def main0(template_images):
     '''
     0のテンプレート画像を比較する
@@ -136,6 +137,7 @@ def main0(template_images):
     plt.close(fig)
     print(f'Result image saved to: {save_path}')
     
+# 0と異なる種類の0のテンプレート画像を比較する
 def main1(template_images):
     '''
     0と異なる種類の0のテンプレート画像を比較する
@@ -153,6 +155,7 @@ def main1(template_images):
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching1')
     print(f'Result image saved to: {save_path}')
     
+# 0と異なる種類の0(似ている)のテンプレート画像を比較する
 def main2(template_images):
     '''
     0と異なる種類の0(似ている)のテンプレート画像を比較する
@@ -170,6 +173,7 @@ def main2(template_images):
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching2')
     print(f'Result image saved to: {save_path}')
 
+# 0と異なる数字のテンプレート画像を比較する
 def main3(template_images):
     '''
     0と異なる数字のテンプレート画像を比較する
@@ -187,6 +191,7 @@ def main3(template_images):
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching3')
     print(f'Result image saved to: {save_path}')
     
+# 回転した画像との比較
 def main4(template_images):
     '''
     回転した画像との比較
@@ -205,6 +210,7 @@ def main4(template_images):
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching4')
     print(f'Result image saved to: {save_path}')
     
+# 縮小した画像との比較
 def main5(template_images):
     '''
     縮小した画像との比較
@@ -223,6 +229,7 @@ def main5(template_images):
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching5')
     print(f'Result image saved to: {save_path}')
     
+# 拡大した画像との比較
 def main6(template_images):
     '''
     拡大した画像との比較
