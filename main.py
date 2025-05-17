@@ -199,7 +199,7 @@ def main6(template_images):
     拡大した画像との比較
     '''
     print("Executing template matching main6...")
-    scale = 2.0
+    scale = 3.0
     test_image = template_images[0][0]
     target1 = test_image
     target2 = cv2.resize(test_image, (0, 0), fx=scale, fy=scale)
