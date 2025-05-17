@@ -106,9 +106,9 @@ def save_combined_results(test_images, target1, target2, score1, score2, path):
 
 def main0(template_images):
     '''
-    0と異なる種類の0のテンプレート画像を比較する
+    0のテンプレート画像を比較する
     '''
-    print("Executing template matching main1...")
+    print("Executing template matching main0...")
     test_image = template_images[0][0]
     target1 = test_image
     
