@@ -51,7 +51,13 @@ def save_template_images(templates):
     print("Template images saved.")
     return True
 
-# テンプレートマッチングによる数字の判別
+def rotate_image(image, angle):
+    (h, w) = image.shape[:2]
+    center = (w // 2, h // 2)
+    M = cv2.getRotationMatrix2D(center, angle, 1.0)
+    rotated = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+    return rotated
+
 def template_matching(test_image, template_image):
     test_img = (test_image * 255).astype(np.uint8)
     template = (template_image * 255).astype(np.uint8)
@@ -102,23 +108,44 @@ def save_combined_results(test_images, target1, target2, score1, score2, path):
     return save_path
 
 def main1(template_images):
-    print("Executing template matching...")
+    '''
+    0と異なる種類の0のテンプレート画像を比較する
+    '''
+    print("Executing template matching main1...")
     test_image = template_images[0][0]
     target1 = test_image
-    target2 = template_images[0][3]
+    target2 = template_images[0][7]
     
     score1 = template_matching(test_image, target1)
     score2 = template_matching(test_image, target2)
     print(f'Score1: {score1:.4f}')
     print(f'Score2: {score2:.4f}')
     
-    print("Saving result image...")
     save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching1')
     print(f'Result image saved to: {save_path}')
-    print("Processing completed.")
-
+    
 def main2(template_images):
-    print("Executing template matching...")
+    '''
+    0と異なる種類の0(似ている)のテンプレート画像を比較する
+    '''
+    print("Executing template matching main2...")
+    test_image = template_images[0][0]
+    target1 = test_image
+    target2 = template_images[0][2]
+    
+    score1 = template_matching(test_image, target1)
+    score2 = template_matching(test_image, target2)
+    print(f'Score1: {score1:.4f}')
+    print(f'Score2: {score2:.4f}')
+    
+    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching2')
+    print(f'Result image saved to: {save_path}')
+
+def main3(template_images):
+    '''
+    0と異なる数字のテンプレート画像を比較する
+    '''
+    print("Executing template matching main3...")
     test_image = template_images[0][0]
     target1 = test_image
     target2 = template_images[1][0]
@@ -128,10 +155,62 @@ def main2(template_images):
     print(f'Score1: {score1:.4f}')
     print(f'Score2: {score2:.4f}')
     
-    print("Saving result image...")
-    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching2')
+    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching3')
     print(f'Result image saved to: {save_path}')
-    print("Processing completed.")
+    
+def main4(template_images):
+    '''
+    回転した画像との比較
+    '''
+    print("Executing template matching main4...")
+    degrees = 30
+    test_image = template_images[0][0]
+    target1 = test_image
+    target2 = rotate_image(test_image, degrees)
+    
+    score1 = template_matching(test_image, target1)
+    score2 = template_matching(test_image, target2)
+    print(f'Score1: {score1:.4f}')
+    print(f'Score2: {score2:.4f}')
+    
+    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching4')
+    print(f'Result image saved to: {save_path}')
+    
+def main5(template_images):
+    '''
+    縮小した画像との比較
+    '''
+    print("Executing template matching main5...")
+    scale = 0.5
+    test_image = template_images[0][0]
+    target1 = test_image
+    target2 = cv2.resize(test_image, (0, 0), fx=scale, fy=scale)
+    
+    score1 = template_matching(test_image, target1)
+    score2 = template_matching(test_image, target2)
+    print(f'Score1: {score1:.4f}')
+    print(f'Score2: {score2:.4f}')
+    
+    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching5')
+    print(f'Result image saved to: {save_path}')
+    
+def main6(template_images):
+    '''
+    拡大した画像との比較
+    '''
+    print("Executing template matching main6...")
+    scale = 2.0
+    test_image = template_images[0][0]
+    target1 = test_image
+    target2 = cv2.resize(test_image, (0, 0), fx=scale, fy=scale)
+    
+    score1 = template_matching(test_image, target1)
+    score2 = template_matching(test_image, target2)
+    print(f'Score1: {score1:.4f}')
+    print(f'Score2: {score2:.4f}')
+    
+    save_path = save_combined_results(test_image, target1, target2, score1, score2, 'template_matching6')
+    print(f'Result image saved to: {save_path}')
 
 if __name__ == "__main__":
     os.makedirs('results', exist_ok=True)
@@ -141,3 +220,8 @@ if __name__ == "__main__":
     save_template_images(template_images)
     main1(template_images)
     main2(template_images)
+    main3(template_images)
+    main4(template_images)
+    main5(template_images)
+    main6(template_images)
+    print("Processing completed.")
