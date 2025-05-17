@@ -1,13 +1,10 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib
-# バックエンドを設定
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import cv2
 import os
-import time
-from matplotlib import font_manager
 
 # 警告を抑制
 import warnings
