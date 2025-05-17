@@ -104,6 +104,38 @@ def save_combined_results(test_images, target1, target2, score1, score2, path):
     
     return save_path
 
+def main0(template_images):
+    '''
+    0と異なる種類の0のテンプレート画像を比較する
+    '''
+    print("Executing template matching main1...")
+    test_image = template_images[0][0]
+    target1 = test_image
+    
+    score1 = template_matching(test_image, target1)
+    print(f'Score1: {score1:.4f}')
+    
+    set_font()
+    
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+    
+    i = 0
+    axes[i].imshow(test_image, cmap='gray')
+    axes[i].set_title('リファレンス')
+    axes[i].axis('off')
+    
+    i = 1
+    axes[i].imshow(target1, cmap='gray')
+    axes[i].set_title(f'ターゲット, スコア: {score1:.4f}')
+    axes[i].axis('off')
+    
+    plt.tight_layout()
+    
+    save_path = os.path.join('results', f'template_matching0.png')
+    plt.savefig(save_path, dpi=150, bbox_inches='tight')
+    plt.close(fig)
+    print(f'Result image saved to: {save_path}')
+    
 def main1(template_images):
     '''
     0と異なる種類の0のテンプレート画像を比較する
@@ -215,6 +247,7 @@ if __name__ == "__main__":
     template_images = get_template_image()
     
     save_template_images(template_images)
+    main0(template_images)
     main1(template_images)
     main2(template_images)
     main3(template_images)
