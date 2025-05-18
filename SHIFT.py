@@ -88,7 +88,7 @@ def compute_homography_from_matches(good_matches, kp1, kp2):
     homography_matrix, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
     return homography_matrix
 
-# --- 3. 描画・表示関連の関数 (修正箇所) ---
+# --- 3. 描画・表示関連の関数 ---
 def draw_aspect_corrected_rectangle(image_to_draw_on, transformed_corners, original_template_shape, object_name="Object"):
     """
     変換後のコーナーから中心・角度・サイズを推定し、元のテンプレートのアスペクト比を
