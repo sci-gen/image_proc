@@ -140,7 +140,6 @@ def draw_aspect_corrected_rectangle(image_to_draw_on, transformed_corners, origi
         return img_with_fallback_box
 
     # 4. 新しいパラメータで回転矩形を定義し、その頂点を取得
-    # (new_w, new_h) の順番と angle_deg の関係は cv2.boxPoints が適切に処理する
     new_rect_params = (center, (float(new_w), float(new_h)), angle_deg)
     box_new = cv2.boxPoints(new_rect_params)
     box_new = np.intp(box_new)
@@ -174,7 +173,7 @@ def visualize_sift_matches(img_template, kp_template, img_query_with_box, kp_que
     plt.axis('off')
     plt.savefig(save_path)
 
-# --- 4. メインワークフロー関数 (修正箇所) ---
+# --- 4. メインワークフロー関数 ---
 def perform_sift_template_matching(template_img_gray, query_img_gray, object_name="Object",
                                    min_match_count=4,
                                    scale_factor=1.0,
@@ -277,9 +276,6 @@ def perform_sift_template_matching(template_img_gray, query_img_gray, object_nam
 # ユーザーが提供したmain_flow関数
 def main_flow(x_train_data, y_train_data, digit_to_process, ratio_thresh_val=0.75): # ratio_thresh_valを追加
     template_indices = np.where(y_train_data == digit_to_process)[0]
-    if not template_indices.size:
-        print(f"エラー: 数字 {digit_to_process} のテンプレートが訓練データに見つかりません。")
-        return
 
     template_image = x_train_data[template_indices[0]]
     query_image_original = create_transformed_query_image(template_image,
