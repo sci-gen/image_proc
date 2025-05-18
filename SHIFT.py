@@ -273,7 +273,6 @@ def perform_sift_template_matching(template_img_gray, query_img_gray, object_nam
         plt.savefig(save_path)
     print(f"--- \"{object_name}\" のマッチング処理終了 ---\n")
 
-# ユーザーが提供したmain_flow関数
 def main_flow(x_train_data, y_train_data, digit_to_process, ratio_thresh_val=0.75): # ratio_thresh_valを追加
     template_indices = np.where(y_train_data == digit_to_process)[0]
 
